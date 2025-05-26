@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lens Types - Cataract Detection</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Add your custom styles here */
+        .chatbot-container {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .chatbot-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chatbot-body {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .chatbot-footer {
+            display: flex;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .chatbot-footer input {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .chatbot-active {
+            display: block;
+        }
+    </style>
+</head>
+<body style="background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed; background-size: cover;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.jpg" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                Cataract Detection
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="lenses.html">Lenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact us.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="carts.html">Cart (<span id="cartCount">0</span>)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lens Types Section -->
+    <section class="container my-5" style="background-color: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 30px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+        <h2 class="text-center mb-4" style="color: #2c3e50;">Types of Lenses for Cataract Detection</h2>
+        <div class="row">
+            <!-- Lens 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100" style="border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <img src="assets/images/lens1.jpg" class="card-img-top" alt="Lens 1" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #3498db;">Monofocal Lens</h5>
+                        <p class="card-text">Monofocal lenses are the most common type of intraocular lenses used in cataract surgery. They provide clear vision at one distance (near, intermediate, or far).</p>
+                        <p class="card-text"><strong>Price: ₹15,000</strong></p>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" id="quantity1" min="0" value="0" style="border-radius: 5px;">
+                            <button class="btn btn-primary" onclick="addToCart('Monofocal Lens', 15000, 'quantity1')" style="background-color: #3498db; border: none; border-radius: 5px;">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lens 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100" style="border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <img src="assets/images/lens2.jpg" class="card-img-top" alt="Lens 2" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #3498db;">Multifocal Lens</h5>
+                        <p class="card-text">Multifocal lenses provide clear vision at multiple distances, reducing the need for glasses after cataract surgery.</p>
+                        <p class="card-text"><strong>Price: ₹30,000</strong></p>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" id="quantity2" min="0" value="0" style="border-radius: 5px;">
+                            <button class="btn btn-primary" onclick="addToCart('Multifocal Lens', 30000, 'quantity2')" style="background-color: #3498db; border: none; border-radius: 5px;">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lens 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100" style="border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <img src="assets/images/lens3.jpg" class="card-img-top" alt="Lens 3" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #3498db;">Toric Lens</h5>
+                        <p class="card-text">Toric lenses are designed to correct astigmatism and provide clear vision at a single distance.</p>
+                        <p class="card-text"><strong>Price: ₹25,000</strong></p>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" id="quantity3" min="0" value="0" style="border-radius: 5px;">
+                            <button class="btn btn-primary" onclick="addToCart('Toric Lens', 25000, 'quantity3')" style="background-color: #3498db; border: none; border-radius: 5px;">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lens 4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100" style="border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                    <img src="assets/images/lens4.jpg" class="card-img-top" alt="Lens 4" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #3498db;">Light Adjustable Lens</h5>
+                        <p class="card-text">The first and only intraocular lens (IOL) that can be altered following cataract surgery. It allows you to adjust and preview your vision until it satisfies your preferences and lifestyle needs.</p>
+                        <p class="card-text"><strong>Price: ₹40,000</strong></p>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" id="quantity4" min="0" value="0" style="border-radius: 5px;">
+                            <button class="btn btn-primary" onclick="addToCart('Light Adjustable Lens', 40000, 'quantity4')" style="background-color: #3498db; border: none; border-radius: 5px;">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lens Comparison Section -->
+    <section class="container my-5" style="background-color: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 30px; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+        <h2 class="text-center mb-4" style="color: #2c3e50;">Which Lens is Right for You?</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered" style="border-color: #dee2e6;">
+                <thead style="background-color: #3498db; color: white;">
+                    <tr>
+                        <th>Lens Type</th>
+                        <th>Best For</th>
+                        <th>Advantages</th>
+                        <th>Disadvantages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monofocal Lens</td>
+                        <td>Clear vision at one distance</td>
+                        <td>Affordable, reliable</td>
+                        <td>Requires glasses for other distances</td>
+                    </tr>
+                    <tr>
+                        <td>Multifocal Lens</td>
+                        <td>Clear vision at multiple distances</td>
+                        <td>Reduces dependency on glasses</td>
+                        <td>Higher cost, may cause glare</td>
+                    </tr>
+                    <tr>
+                        <td>Toric Lens</td>
+                        <td>Correcting astigmatism</td>
+                        <td>Clear vision for astigmatism patients</td>
+                        <td>Higher cost, limited to single distance</td>
+                    </tr>
+                    <tr>
+                        <td>Light Adjustable Lens</td>
+                        <td>Customizable vision</td>
+                        <td>Adjustable after surgery, precise vision</td>
+                        <td>Most expensive, requires follow-up visits</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Positive Conditions Section -->
+    <section class="container my-5 p-4" style="background-color: #3498db; border-radius: 15px; color: white; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+        <h2 class="text-center mb-4">Why Choose Us?</h2>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <h4>✅ High-Quality Lenses</h4>
+                <p>We use only the best materials for our lenses, ensuring durability and clarity.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h4>✅ Affordable Prices</h4>
+                <p>Get the best value for your money with our competitive pricing.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h4>✅ Easy Returns</h4>
+                <p>Not satisfied? We offer a 30-day return policy with no questions asked.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="btn btn-primary chatbot-toggle-btn" onclick="toggleChatbot()" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background-color: #3498db; border: none; padding: 15px; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">💬</button>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbot" style="display: none; position: fixed; bottom: 80px; right: 20px; width: 350px; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
+        <div class="chatbot-header" style="background: #3498db; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <h5 style="margin: 0;">Chatbot</h5>
+            <button class="btn btn-sm btn-danger" onclick="toggleChatbot()" style="padding: 5px 10px;">Close</button>
+        </div>
+        <div class="chatbot-body" id="chatbot-body" style="height: 300px; overflow-y: auto; padding: 15px; background: #f8f9fa;">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="chatbot-footer" style="display: flex; padding: 10px; border-top: 1px solid #ddd; background: white;">
+            <input type="text" id="chatbot-input" class="form-control" placeholder="Type a message..." style="flex: 1; margin-right: 10px; border-radius: 20px; padding: 10px 15px;">
+            <button class="btn btn-primary" id="sendMessage" style="border-radius: 20px; padding: 10px 15px; background: #3498db; border: none;">Send</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3" style="margin-top: 50px;">
+        <p style="margin: 0;">&copy; 2025 Cataract Detection. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Function to add items to the cart
+        function addToCart(name, price, quantityId) {
+            const quantity = document.getElementById(quantityId).value;
+            if (quantity <= 0) {
+                alert("Please enter a valid quantity.");
+                return;
+            }
+            const item = { name, price, quantity };
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`${name} added to cart!`);
+        }
+
+        // Function to update the cart count
+        function updateCartCount() {
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = cart.length;
+        }
+
+        // Function to proceed to payment
+        function proceedToPayment() {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to proceed.");
+                return;
+            }
+            // Redirect to payment gateway (e.g., Stripe, PayPal)
+            window.location.href = "payment.html";
+        }
+
+        // Initialize cart count on page load
+        updateCartCount();
+
+        // Chatbot functions
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            chatbot.style.display = chatbot.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function sendMessage() {
+            const inputField = document.getElementById('chatbot-input');
+            const message = inputField.value.trim();
+
+            if (message === '') {
+                return;
+            }
+
+            // Add the user's message to the chat
+            const chatbotBody = document.getElementById('chatbot-body');
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.innerHTML = "<strong>You:</strong> " + message;
+            userMessageDiv.style.marginBottom = "10px";
+            userMessageDiv.style.padding = "8px 12px";
+            userMessageDiv.style.backgroundColor = "#e3f2fd";
+            userMessageDiv.style.borderRadius = "10px";
+            userMessageDiv.style.display = "inline-block";
+            chatbotBody.appendChild(userMessageDiv);
+
+            // Clear input field
+            inputField.value = '';
+
+            // Simulate bot response
+            setTimeout(function() {
+                const botResponseDiv = document.createElement('div');
+                botResponseDiv.innerHTML = "<strong>Bot:</strong> I can help you with information about our lenses. Would you like to know about pricing, features, or something else?";
+                botResponseDiv.style.marginBottom = "10px";
+                botResponseDiv.style.padding = "8px 12px";
+                botResponseDiv.style.backgroundColor = "#f1f1f1";
+                botResponseDiv.style.borderRadius = "10px";
+                botResponseDiv.style.display = "inline-block";
+                botResponseDiv.style.float = "right";
+                chatbotBody.appendChild(botResponseDiv);
+
+                // Scroll to the bottom of the chat messages
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            }, 500);
+        }
+
+        // Allow pressing Enter to send message
+        document.getElementById('chatbot-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

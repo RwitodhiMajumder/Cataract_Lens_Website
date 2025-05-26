@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Pay Payment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: Arial, sans-serif;">
+    <!-- Payment Container -->
+    <div style="background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; max-width: 400px; width: 100%; position: relative; z-index: 1;">
+        <h2 style="color: #28a745; margin-bottom: 20px;">Google Pay Payment</h2>
+        <p style="color: #555; margin-bottom: 20px;">Scan the QR code below or enter the UPI ID to complete your payment.</p>
+        <img src="assets/images/google-pay-qr.jpg" alt="Google Pay QR" style="border: 2px solid #28a745; border-radius: 10px; padding: 5px; max-width: 250px; width: 100%;">
+        <p style="font-size: 1.1rem; font-weight: bold; color: #333; margin-top: 20px;">UPI ID: example@upi</p>
+        <button style="background-color: #28a745; color: rgb(49, 39, 39); border: none; border-radius: 5px; padding: 10px; font-size: 1.2rem; width: 100%; margin-top: 20px; cursor: pointer;" onclick="confirmPayment()">Confirm Payment</button>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button onclick="toggleChatbot()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background-color: #0d6efd; color: white; border: none; font-size: 24px; cursor: pointer; z-index: 1000;">💬</button>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background-color: white; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); flex-direction: column; z-index: 1000;">
+        <div style="padding: 15px; background-color: #0d6efd; color: white; border-top-left-radius: 10px; border-top-right-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <h5 style="margin: 0;">Cataract Assistant</h5>
+            <button onclick="toggleChatbot()" style="background-color: #dc3545; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">Close</button>
+        </div>
+        <div id="chatbot-body" style="flex: 1; padding: 15px; overflow-y: auto; background-color: #f8f9fa;">
+            <div style="background-color: #e9ecef; color: black; padding: 10px 15px; margin: 8px; border-radius: 18px; max-width: 80%; word-wrap: break-word; clear: both; float: left; border-bottom-left-radius: 5px;">
+                Hello! I'm your Cataract Detection assistant. How can I help you today?
+            </div>
+        </div>
+        <div style="padding: 15px; border-top: 1px solid #ddd; background-color: white;">
+            <input type="text" id="chatbot-input" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px;" placeholder="Type a message..." onkeypress="handleChatInputKeypress(event)">
+            <button onclick="sendMessage()" style="width: 100%; background-color: #0d6efd; color: white; border: none; border-radius: 5px; padding: 10px; cursor: pointer;">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Payment confirmation function
+        function confirmPayment() {
+            let paymentSuccess = Math.random() > 0.1; // 90% success, 10% failure
+            if (paymentSuccess) {
+                alert("Payment successful!");
+                window.location.href = "success.html";
+            } else {
+                alert("Payment failed! Please try again.");
+                window.location.href = "failure.html";
+            }
+        }
+
+        // Chatbot functions
+        const chatbotResponses = {
+            "hello": "Hello! How can I assist you with cataract-related questions today?",
+            "hi": "Hi there! What would you like to know about cataracts?",
+            "payment": "For payment issues, please check your transaction history or contact our support team.",
+            "help": "I can help with information about cataracts, payment queries, and general assistance.",
+            "thanks": "You're welcome! Let me know if you have any other questions.",
+            "default": "I'm sorry, I didn't understand that. Could you please ask your question differently?"
+        };
+
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot-container');
+            chatbot.style.display = chatbot.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                setTimeout(() => {
+                    const response = getBotResponse(message);
+                    addMessage(response, 'bot');
+                }, 500);
+            }
+        }
+
+        function handleChatInputKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const chatBody = document.getElementById('chatbot-body');
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = text;
+            messageDiv.style.padding = '10px 15px';
+            messageDiv.style.margin = '8px';
+            messageDiv.style.borderRadius = '18px';
+            messageDiv.style.maxWidth = '80%';
+            messageDiv.style.wordWrap = 'break-word';
+            messageDiv.style.clear = 'both';
+            
+            if (sender === 'user') {
+                messageDiv.style.backgroundColor = '#0d6efd';
+                messageDiv.style.color = 'white';
+                messageDiv.style.float = 'right';
+                messageDiv.style.borderBottomRightRadius = '5px';
+            } else {
+                messageDiv.style.backgroundColor = '#e9ecef';
+                messageDiv.style.color = 'black';
+                messageDiv.style.float = 'left';
+                messageDiv.style.borderBottomLeftRadius = '5px';
+            }
+            
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                return chatbotResponses["hello"];
+            } else if (lowerMessage.includes('payment') || lowerMessage.includes('pay')) {
+                return chatbotResponses["payment"];
+            } else if (lowerMessage.includes('help')) {
+                return chatbotResponses["help"];
+            } else if (lowerMessage.includes('thank')) {
+                return chatbotResponses["thanks"];
+            } else {
+                return chatbotResponses["default"];
+            }
+        }
+    </script>
+</body>
+</html>
